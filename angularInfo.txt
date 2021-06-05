@@ -1,0 +1,200 @@
+
+###Reasons why we need Node.js for Angular
+“Angular” is entirely new framework and it is (Angular or Angular 2) written in Typescript. Browser does not understand Typescript JS (i.e., .ts) we need to compile them in plain JavaScript i.e., .js.
+We need to use Node and NPM compile them into js file so that we can deploy them in production.
+Most of the Angular packages or libraries at GitHub repository (github.com/angular/angular) are distributed as different NPM packages. Node Package Manager is heavily dependent on Node.js.
+As explained in my previous article Angular set up in local Environment, Using Angular CLI module we can automate so many things in Angular 2 or Angular.
+If you are writing unit tests we need to install test libraries and runner though NPM and executed using Node.
+If you want to minimize the size of your Javascript files? If so, install a minification library via NPM and executed using Node.
+
+
+Angular does not need NodeJS directly and it is not mandatory to use NodeJS. But you will need NodeJS for all the build and development tools.
+
+For an example these are few reasons that you need NodeJS for building an Angular app,
+
+npm (node package manager) comes with NodeJS by default and it allows you to manage your dependencies. So, you don’t have to worry for operations like adding a dependency, removing some, updating your package.json.
+
+npm gives you angular cli or ng cli(angular command line interface)
+which is a great tool for building your application easily
+
+NodeJS allows you to spin up a lightweight web server to host your
+application locally in your system.
+
+
+
+//node js download link
+https://nodejs.org/en/download/
+
+//open below link 
+https://angular.io/cli
+
+//create folder
+F:\Avinash\Project\Angular
+
+//type cmd to open it in comand prompt
+// -> to clear
+cls
+
+//Installing Angular CLI using npm package manager use sudo in linux
+npm install -g @angular/cli
+
+//help command
+ng help
+ng generate --help
+
+
+//To create, build, and serve a new, basic Angular project on a development server, go to the parent directory of your new workspace use the following commands:
+ng new emailgui
+cd emailgui
+ng serve
+
+
+//move in project 
+cd emailgui
+
+//view directories
+dir -> windows
+ls -> linux
+
+//to build and deployment in live deployment server
+ng serve
+
+//hit below link to browser
+http://localhost:4200/
+
+//open project in vs code
+
+//project can be run through vs code also ctrl + c to stop server
+ termincal >> new terminal 
+ ~ng serve
+  ng serve --port 4201
+  
+ ####### Building and hosting your application
+To build your application for production, use the build command. By default, this command uses the production build configuration.
+
+ng build
+
+This command creates a dist folder in the application root directory with all the files that a hosting service needs for serving your application.
+
+If the above ng build command throws an error about missing packages, append the missing dependencies in your local project's package.json file to match the one in the downloaded StackBlitz project.
+
+Copy the contents of the dist/my-project-name folder to your web server. Because these files are static, you can host them on any web server capable of serving files; such as Node.js, Java, .NET, or any backend such as Firebase, Google Cloud, or App Engine. For more information, see Building & Serving and Deployment.
+
+ 
+ //folder structure
+ 
+  src 
+   app --> contains all component and service file (very imp)
+   assets --> photo etc
+   index.html --> main entry 
+   
+   Angular is a framework which allows us to create "Single Page Applications" (SPA), and here the index.html is the single page which was provided by the server.
+   
+   <app-root> --> angular directive / tag that represent component
+   
+   
+   Angular follow component based architecture
+   component --> represent individual unit that is reusable has their own html, css, and typescript files 
+   example navbar --> navbar component that will be include in index.html  like wise header,footer,list,form
+   
+   single component (navbar) made up of
+   1) html->(template in angular)
+   2) typescript -> dynamic code TypeScript is pure object oriented with classes, interfaces and statically typed like C# or Java that compiles to plain JavaScript
+   3) style -> css
+   
+   component = html + css + ts
+   
+   	HTML Template
+	HTML template is nothing but a regular HTML code with additional Angular specific syntax to communicate with the component class.
+
+	Class
+	Essentially, a component class is a TypeScript class that includes properties and methods. Properties store data and methods include the logic for the component. Eventually, this class will be compiled into JavaScript.
+
+	Metadata
+	Metadata is some extra data for a component used by Angular API to execute the component, such as the location of HTML and CSS files of the component, selector, providers, etc.
+
+	Component Naming Convention
+	All the component files in Angular should follow the following format:
+
+	<component-name>.component.<file-type>
+
+   
+   
+   App component
+   
+   1)app.component.html(template)
+   2)app.component.ts --> logic
+   3)app.component.css
+   4)app.component.specs.ts --> for testing
+   
+
+
+   //########### explanation of app.component.ts
+   
+   //The import statement gets the required feature from the Angular or other libraries.
+   //Import allows us to use exported members from external modules. For example, 
+   //@Component decorator and OnInit interface are contained in @angular/core library. So, we can use them after importing it.
+   
+    import { Component } from '@angular/core';
+
+	//decorator used to specify the component metadata
+	//instructs Angular where to get required files for the component
+	//All Angular components must have @Component decorator above the component class.
+	//metadata
+	@Component({
+	  selector: 'app-root',  --> component tag
+	  templateUrl: './app.component.html', --> html file name and location
+	  styleUrls: ['./app.component.css']   --> css file name and location
+	})
+	
+	//component class contains properties and methods to interact with the view through an Angular API.
+	export class AppComponent {
+	  title = 'emailgui';
+	}
+
+  //command to create new component to automatically create component and Bootstrapping it
+  ng g component navbar
+  
+  //######Bootstrapping Component = load our component into the root component(app component)
+  //steps 
+    1. Declare a component in the root module.
+	
+	import { NgModule } from '@angular/core';
+	import { BrowserModule } from '@angular/platform-browser';
+
+	import { AppRoutingModule } from './app-routing.module';
+	import { AppComponent } from './app.component';
+	import { NavbarComponent } from './components/navbar/navbar.component'; //import NavbarComponent
+
+	@NgModule({
+	  declarations: [
+		AppComponent,
+		NavbarComponent // <- include NavbarComponent in declarations
+	  ],
+	  imports: [
+		BrowserModule,
+		AppRoutingModule
+	  ],
+	  providers: [],
+	  bootstrap: [AppComponent]
+	})
+	export class AppModule { }
+
+	
+	2. Add component tag in the root HTML template.
+	
+	<app-navbar></app-navbar>
+	
+	
+	//Install Angular Material
+	ng add @angular/material
+	
+	//command to create services
+	ng g service email
+
+  
+
+   
+   
+   
+   
